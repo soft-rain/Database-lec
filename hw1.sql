@@ -2,34 +2,34 @@
 CREATE TABLE Constructors
 (
     constructor     varchar(20) not null,
-    country         varchar(10),
+    country         varchar(15),
     engine          varchar(10),
     races_entered   int,
     height          int,
     width           int,
     PRIMARY KEY(constructor)
-)
+);
 describe Constructors;
 -- 1.b)
 CREATE TABLE Drivers
 (
-    name            varchar(15) not null,
+    driver          varchar(15) not null,
     birthday        date,
     country         varchar(10),
     constructor     varchar(20),
-    PRIMARY KEY(name),
-    FOREIGN KEY (constructor) REFERENCES Constructors);
+    PRIMARY KEY(driver),
+    FOREIGN KEY (constructor) REFERENCES Constructors(constructor)
+);
 
-)
 describe Drivers;
 -- 1.c)
 CREATE TABLE Races
 (
-    name            varchar(30) not null,
-    date            date,
-    area            varchar(20)
-    PRIMARY KEY(name),
-)
+    Name            varchar(30) not null,
+    beginDate       date,
+    area            varchar(20),
+    PRIMARY KEY(Name)
+);
 describe Races;
 -- 1.d)
 CREATE TABLE Results
@@ -38,8 +38,8 @@ CREATE TABLE Results
     driver          varchar(15) not null,
     race_rank       varchar(15),
     PRIMARY KEY(race, driver),
-    FOREIGN KEY (race) REFERENCES Races,
-    FOREIGN KEY (driver) REFERENCES Drivers
-)
+    FOREIGN KEY (race) REFERENCES Races(Name),
+    FOREIGN KEY (driver) REFERENCES Drivers(driver)
+);
 describe Results;
 
